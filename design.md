@@ -1,4 +1,4 @@
-# 📄 **Design Document: SmartSearch CLI – AI Academic Resource Finder**
+# **Design Document: SmartSearch CLI – AI Academic Resource Finder**
 
 ---
 
