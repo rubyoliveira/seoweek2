@@ -14,6 +14,8 @@ youtube_url = 'https://www.googleapis.com/youtube/v3/search'
 
 if not gemini_api_key:
     raise ValueError("GENAI_KEY not found in environment variables. Check your .env file.")
+if not youtube_api_key:
+    raise ValueError("YOUTUBE_API_KEY not found in environment variables. Check your .env file.")
 
 genai.api_key = gemini_api_key
 
@@ -33,20 +35,15 @@ response = client.models.generate_content(
     contents = user_request,
 )
 
-
+print("\n🔍 Gemini search query:")
 print(response.text)
-
-youtube_api_key = os.getenv("YOUTUBE_API_KEY")
-
-if not youtube_api_key:
-    raise ValueError("YOUTUBE_API_KEY not found in environment variables. Check your .env file.")
 
 youtube = build("youtube", "v3", developerKey=youtube_api_key)
 youtube_response = youtube.search().list(
     part='snippet',
     q=response.text,
     type='video',
-    maxResult=5
+    maxResults=5
 ).execute()
 
 print("\n📹 Top YouTube Results:")
