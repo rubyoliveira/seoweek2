@@ -1,46 +1,56 @@
-import os
-from dotenv import load_dotenv
-from google import genai
-from google.genai import types
+from gemini_api import generate_prompt
+from youtube_api import search_youtube_videos
 
-# Load API key from .env
-load_dotenv()
+def main():
+    print("SmartSearch: AI-Powered Video Finder\n")
+    
+    # Step 1: Get input from user
+    user_topic = input("What topic or concept do you need help with?\n> ")
 
-# Set environment variables
-my_api_key = os.getenv('GENAI_KEY')
+    # Step 2: Generate YouTube search query using Gemini
+    print("\nGenerating an optimized search query...")
+    search_query = generate_prompt(user_topic)
+    print(f"Search query: {search_query}")
 
-if not my_api_key:
-    raise ValueError("GENAI_KEY not found in environment variables. Check your .env file.")
+    # Step 3: Search YouTube using that query
+    print("\nFetching top YouTube videos...")
+    videos = search_youtube_videos(search_query)
 
-genai.api_key = my_api_key
+    # Step 4: Show results
+    if not videos:
+        print("No videos found. Try a different topic.")
+        return
 
-# Create an genAI client using the key from our environment variable
-client = genai.Client(
-    api_key = my_api_key,
-)
+    print("\nTop 3 YouTube Results:\n")
+    for i, (title, url) in enumerate(videos, 1):
+        print(f"{i}. {title}\n   {url}\n")
 
-# Specify the model to use and the messages to send
-response = client.models.generate_content(
-    model = "gemini-2.5-flash",
-    config = types.GenerateContentConfig(
-      system_instruction = "You are a university instructor and can explain programming concepts clearly in a few words."
-    ),
-    contents = "What are the advantages of pair programming?",
-)
+if __name__ == "__main__":
+    main()
 
-print(response.text)
+"""
+# sample input and output
 
-youtube = build("youtube", "v3", developerKey=youtube_api_key)
-youtube_response = youtube.search().list(
-    part='snippet',
-    q=response.text,
-    type='video',
-    maxResults=5
-).execute()
+SmartSearch: AI-Powered Video Finder
 
-print("\n📹 Top YouTube Results:")
-for item in youtube_response["items"]:
-    title = item["snippet"]["title"]
-    video_id = item["id"]["videoId"]
-    url = f"https://www.youtube.com/watch?v={video_id}"
-    print(f"- {title}\n  {url}\n")
+What topic or concept do you need help with?
+> i need help with recursion as a programming concept. I find it hard to under
+stand this concept
+
+Generating an optimized search query...
+Search query: Recursion programming explained
+
+ Fetching top YouTube videos...
+
+ Top 3 YouTube Results:
+
+1. This is a Better Way to Understand Recursion
+   https://www.youtube.com/watch?v=Q83nN97LVOU
+
+2. Recursion in 100 Seconds
+   https://www.youtube.com/watch?v=rf60MejMz3E
+
+3. Recursion Simply Explained with Code Examples - Python for Beginners       
+   https://www.youtube.com/watch?v=m1Fjdnj_Mds
+
+"""
