@@ -19,13 +19,15 @@ client = genai.Client(
     api_key = my_api_key,
 )
 
+user_request = input("Enter your request to gemini: ")
+
 # Specify the model to use and the messages to send
 response = client.models.generate_content(
     model = "gemini-2.5-flash",
     config = types.GenerateContentConfig(
       system_instruction = "You are a master at making search queries for youtube videos, only return the search query and nothing else.",
     ),
-    contents = "I have a google SWE interview coming up and idk how to do backtracking can you help me?",
+    contents = user_request,
 )
 
 print(response.text)
