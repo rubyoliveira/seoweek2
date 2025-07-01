@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from googleapiclient.discovery import build
 
 # Load environment variables from .env file
 load_dotenv()
@@ -33,3 +34,23 @@ response = client.models.generate_content(
 )
 
 print(response.text)
+
+youtube_api_key = os.getenv("YOUTUBE_API_KEY")
+
+if not youtube_api_key:
+    raise ValueError("YOUTUBE_API_KEY not found in environment variables. Check your .env file.")
+
+youtube = build("youtube", "v3", developerKey=youtube_api_key)
+youtube_response = youtube.search().list(
+    part='snippet',
+    q=response.text,
+    type='video',
+    maxResult=5
+).execute()
+
+print("\n📹 Top YouTube Results:")
+for item in youtube_response["items"]:
+    title = item["snippet"]["title"]
+    video_id = item["id"]["videoId"]
+    url = f"https://www.youtube.com/watch?v={video_id}"
+    print(f"- {title}\n  {url}\n")
