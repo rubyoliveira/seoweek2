@@ -33,6 +33,7 @@ response = client.models.generate_content(
     contents = user_request,
 )
 
+
 print(response.text)
 
 youtube_api_key = os.getenv("YOUTUBE_API_KEY")
