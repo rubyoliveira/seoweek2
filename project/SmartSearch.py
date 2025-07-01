@@ -23,9 +23,9 @@ client = genai.Client(
 response = client.models.generate_content(
     model = "gemini-2.5-flash",
     config = types.GenerateContentConfig(
-      system_instruction = "You are a university instructor and can explain programming concepts clearly in a few words."
+      system_instruction = "You are a master at making search queries for youtube videos, only return the search query and nothing else.",
     ),
-    contents = "What are the advantages of pair programming?",
+    contents = "I have a google SWE interview coming up and idk how to do backtracking can you help me?",
 )
 
 print(response.text)
