@@ -1,4 +1,4 @@
-import os 
+import os
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
@@ -7,16 +7,18 @@ from google.genai import types
 load_dotenv()
 
 # Set environment variables
-my_api_key = os.getenv('GENAI_KEY')
+gemini_api_key = os.getenv('GENAI_KEY')
+youtube_api_key = os.getenv('YOUTUBE_API_KEY')
+youtube_url = 'https://www.googleapis.com/youtube/v3/search'
 
-if not my_api_key:
+if not gemini_api_key:
     raise ValueError("GENAI_KEY not found in environment variables. Check your .env file.")
 
-genai.api_key = my_api_key
+genai.api_key = gemini_api_key
 
 # Create an genAI client using the key from our environment variable
 client = genai.Client(
-    api_key = my_api_key,
+    api_key = gemini_api_key,
 )
 
 user_request = input("Enter your request to gemini: ")
