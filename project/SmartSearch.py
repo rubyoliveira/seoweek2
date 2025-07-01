@@ -1,31 +1,23 @@
-import os 
+import os
 from dotenv import load_dotenv
-from google import genai
-from google.genai import types
+import google.generativeai as genai
 
-# Load environment variables from .env file
+# Load API key from .env
 load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
 
-# Set environment variables
-my_api_key = os.getenv('GENAI_KEY')
+if not api_key:
+    raise ValueError("GEMINI_API_KEY not found in .env file")
 
-if not my_api_key:
-    raise ValueError("GENAI_KEY not found in environment variables. Check your .env file.")
+# Configure Gemini client
+genai.configure(api_key=api_key)
 
-genai.api_key = my_api_key
+# Use the Gemini 1.5 Flash model
+model = genai.GenerativeModel("gemini-1.5-flash")
 
-# Create an genAI client using the key from our environment variable
-client = genai.Client(
-    api_key = my_api_key,
-)
+# Generate a search prompt
+response = model.generate_content("What are the advantages of pair programming?")
 
-# Specify the model to use and the messages to send
-response = client.models.generate_content(
-    model = "gemini-2.5-flash",
-    config = types.GenerateContentConfig(
-      system_instruction = "You are a university instructor and can explain programming concepts clearly in a few words."
-    ),
-    contents = "What are the advantages of pair programming?",
-)
-
+# Display result
+print("\nGenerated Response:")
 print(response.text)
