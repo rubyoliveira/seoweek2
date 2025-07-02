@@ -25,3 +25,34 @@ SmartSearch CLI is built around a simple but powerful flow:
 5. Students can view or revisit past results anytime.
 
 👉 **[Read the full Design Document](./design.md)** for technical details, schema, and implementation breakdown.
+
+---
+
+## Setup Instructions
+
+### 1. Clone the repository  
+Run `git clone https://github.com/<your-username>/seoweek2.git` then `cd seoweek2`
+
+### 2. Create a virtual environment (optional but recommended)  
+Run `python -m venv venv`  
+
+- On **Windows** run: `venv\Scripts\activate`  
+- On **macOS/Linux** run: `source venv/bin/activate`
+
+### 3. Install dependencies  
+Run `pip install -r requirements.txt`
+
+### 4. Set up your `.env` file  
+Create a `.env` file in the root directory and add:  
+- GEMINI_API_KEY=your_gemini_api_key
+- YOUTUBE_API_KEY=your_youtube_api_key
+
+
+### 5. Run the application  
+Run `python SmartSearch.py`
+
+### 6. Run tests  
+- To run all unit tests: `pytest tests/`  
+- To run local mock tests without hitting real APIs: `python -m unittest discover -s tests_local`
+
+---
