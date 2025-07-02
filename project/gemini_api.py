@@ -7,7 +7,7 @@ load_dotenv()
 
 my_api_key = os.getenv("GEMINI_API_KEY")
 if not my_api_key:
-    raise ValueError(f"Missing GEMINI_API_KEY — got: {repr(os.environ)}")
+    raise ValueError("Missing YOUTUBE_API_KEY in .env")
 
 # Create the client
 client = genai.Client(api_key=my_api_key)
