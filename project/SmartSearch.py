@@ -4,6 +4,11 @@ from database import init_db, save_query_and_results, get_search_history
 
 def search_flow():
     user_topic = input("\nWhat topic or concept do you need help with?\n> ")
+
+    if not user_topic.strip():
+        print("Please enter a topic. You can't learn from silence!")
+        return
+    
     print("\nGenerating an optimized search query...")
     search_query = generate_prompt(user_topic)
     print(f"Search query: {search_query}")
