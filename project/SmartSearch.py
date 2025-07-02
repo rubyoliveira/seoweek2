@@ -1,8 +1,11 @@
 from gemini_api import generate_prompt
 from youtube_api import search_youtube_videos
+from database import init_db, save_query_and_results
 
 def main():
     print("SmartSearch: AI-Powered Video Finder\n")
+    # intialize db
+    init_db()
     
     # Step 1: Get input from user
     user_topic = input("What topic or concept do you need help with?\n> ")
@@ -24,6 +27,10 @@ def main():
     print("\nTop 3 YouTube Results:\n")
     for i, (title, url) in enumerate(videos, 1):
         print(f"{i}. {title}\n   {url}\n")
+    
+    save_query_and_results(search_query, videos)
+    print("\nSearch saved to history.")
+
 
 if __name__ == "__main__":
     main()
