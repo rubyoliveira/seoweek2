@@ -2,13 +2,14 @@ from gemini_api import generate_prompt
 from youtube_api import search_youtube_videos
 from database import init_db, save_query_and_results, get_search_history
 
+
 def search_flow():
     user_topic = input("\nWhat topic or concept do you need help with?\n> ")
 
     if not user_topic.strip():
         print("Please enter a topic. You can't learn from silence!")
         return
-    
+
     print("\nGenerating an optimized search query...")
     search_query = generate_prompt(user_topic)
     print(f"Search query: {search_query}")
@@ -20,13 +21,13 @@ def search_flow():
         print("No videos found. Even the AI is confused. Try again?")
         return
 
-
     print("\nTop 3 YouTube Results:\n")
     for i, (title, url) in enumerate(videos, 1):
         print(f"{i}. {title}\n   {url}\n")
 
     save_query_and_results(search_query, videos)
     print("\nSearch saved to history.")
+
 
 def view_history():
     print("\nRecent Search History:\n")
@@ -39,6 +40,7 @@ def view_history():
     for i, entry in enumerate(history, 1):
         print(f"{i}. [{entry['timestamp']}] {entry['query']}")
         print(f"   {entry['title']}\n   {entry['url']}\n")
+
 
 def main():
     init_db()

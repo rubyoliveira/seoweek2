@@ -8,6 +8,7 @@ YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
 if not YOUTUBE_API_KEY:
     raise ValueError("Missing YOUTUBE_API_KEY in .env")
 
+
 def search_youtube_videos(query: str, max_results: int = 3):
     """
     Searches YouTube for videos matching the query.
@@ -37,6 +38,7 @@ def search_youtube_videos(query: str, max_results: int = 3):
 
     return results
 
+
 # sample test case
 # if __name__ == "__main__":
 #     test_query = "recursion explained"
@@ -49,5 +51,5 @@ def search_youtube_videos(query: str, max_results: int = 3):
 #    https://www.youtube.com/watch?v=Q83nN97LVOU
 # 2. Recursion in 100 Seconds
 #    https://www.youtube.com/watch?v=rf60MejMz3E
-# 3. Recursion Simply Explained with Code Examples - Python for Beginners       
+# 3. Recursion Simply Explained with Code Examples - Python for Beginners
 #    https://www.youtube.com/watch?v=m1Fjdnj_Mds

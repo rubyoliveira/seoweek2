@@ -12,6 +12,7 @@ if not my_api_key:
 # Create the client
 client = genai.Client(api_key=my_api_key)
 
+
 def generate_prompt(user_topic: str) -> str:
     """
     Uses Gemini to generate a single optimized YouTube search phrase for a given topic.
@@ -30,8 +31,9 @@ def generate_prompt(user_topic: str) -> str:
 
     return response.text.strip()
 
+
 # sample test
 # print(generate_prompt("I am struggling to understand recursion"))
 
-# output: 
+# output:
 # recursion explained
