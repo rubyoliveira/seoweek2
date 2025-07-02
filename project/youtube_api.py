@@ -38,11 +38,11 @@ def search_youtube_videos(query: str, max_results: int = 3):
     return results
 
 # sample test case
-if __name__ == "__main__":
-    test_query = "recursion explained"
-    videos = search_youtube_videos(test_query)
-    for i, (title, url) in enumerate(videos, 1):
-        print(f"{i}. {title}\n   {url}")
+# if __name__ == "__main__":
+#     test_query = "recursion explained"
+#     videos = search_youtube_videos(test_query)
+#     for i, (title, url) in enumerate(videos, 1):
+#         print(f"{i}. {title}\n   {url}")
 
 # output:
 # 1. This is a Better Way to Understand Recursion
