@@ -53,6 +53,4 @@ Run `python SmartSearch.py`
 
 ### 6. Run tests  
 - To run all unit tests: `pytest tests/`  
-- To run local mock tests without hitting real APIs: `python -m unittest discover -s tests_local`
-
 ---
