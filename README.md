@@ -31,7 +31,7 @@ SmartSearch CLI is built around a simple but powerful flow:
 ## Setup Instructions
 
 ### 1. Clone the repository  
-Run `git clone https://github.com/<your-username>/seoweek2.git` then `cd seoweek2`
+Run `git clone https://github.com/rubyoliveira/seoweek2.git` then `cd seoweek2`
 
 ### 2. Create a virtual environment (optional but recommended)  
 Run `python -m venv venv`  
